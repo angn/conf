@@ -40,6 +40,7 @@
 	rp = reset -p
 	rs = reset
 	st = status -sb
+	view = show --ext-diff
 	up = pull --ff-only --all -t -p --autostash
 	wip = commit -m wip
 [push]
@@ -49,7 +50,14 @@
 	autocrlf = false
 	excludesFile = ~/.gitignore
 [diff]
+	external = difft
 	tool = vimdiff
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+[pager]
+	difftool = true
 [merge]
 	tool = vimdiff
 [filter "lfs"]
