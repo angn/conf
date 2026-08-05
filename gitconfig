@@ -32,6 +32,7 @@
 	ma = merge --abort
 	mc = merge --continue
 	mt = mergetool
+	now = commit --amend --date=now --reset-author --no-edit
 	pick = cherry-pick --ff
 	rc = rebase --continue
 	ra = rebase --abort
