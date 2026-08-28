@@ -80,9 +80,19 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+function! ToggleNERDTree()
+  if exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+    execute ':NERDTreeToggle'
+  elseif expand("%:t") == ''
+	execute ':NERDTreeFocus'
+  else
+	execute ':NERDTreeFind'
+  endif
+endfunction
+
 nnoremap <f2> :w<cr>
 inoremap <f2> <c-o>:w<cr>
-nnoremap <f3> :if expand("%:t")==''\|NERDTreeFocus\|else\|NERDTreeFind\|endif<cr>
+nnoremap <f3> :call ToggleNERDTree()<cr>
 nnoremap <f4> :q<cr>
 nnoremap <f5> :Run<cr>
 nnoremap <f6> <c-^>
