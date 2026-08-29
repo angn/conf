@@ -81,12 +81,12 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
 function! ToggleNERDTree()
-  if exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-    execute ':NERDTreeToggle'
+  if exists("t:NERDTreeBufName") && bufname() == t:NERDTreeBufName
+    NERDTreeToggle
   elseif expand("%:t") == ''
-	execute ':NERDTreeFocus'
+    NERDTreeFocus
   else
-	execute ':NERDTreeFind'
+    NERDTreeFind
   endif
 endfunction
 
