@@ -4,7 +4,8 @@ source $VIMRUNTIME/defaults.vim
 call plug#begin('~/.vim/plugged')
 if exists(':Plug')
   Plug 'scrooloose/nerdtree'
-  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
   Plug 'fatih/vim-go'
   Plug 'tpope/vim-sleuth'
   Plug 'isRuslan/vim-es6'
@@ -25,15 +26,14 @@ if exists(':Plug')
   Plug 'peitalin/vim-jsx-typescript'
   Plug 'keith/swift.vim'
   Plug 'chr4/nginx.vim'
-  "Plug 'yegappan/lsp'
-  "Plug 'mattn/vim-lsp-settings'
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'prabirshrestha/async.vim'
   Plug 'prabirshrestha/vim-lsp'
-  Plug 'ryanolsonx/vim-lsp-javascript'
+  Plug 'mattn/vim-lsp-settings'
   "Plug 'jiangmiao/auto-pairs'
   Plug 'bluz71/vim-mistfly-statusline'
+  Plug 'nanotech/jellybeans.vim'
 endif
 call plug#end()
 
@@ -73,7 +73,11 @@ if $TERM_PROGRAM != "Apple_Terminal"
   set termguicolors
 endif
 
-colorscheme sorbet
+if $TERM_PROGRAM == "Ghostty"
+  colorscheme jellybeans
+else
+  colorscheme sorbet
+endif
 
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
@@ -93,15 +97,24 @@ endfunction
 nnoremap <f2> :w<cr>
 inoremap <f2> <c-o>:w<cr>
 nnoremap <f3> :call ToggleNERDTree()<cr>
+inoremap <f3> <c-o>:call ToggleNERDTree()<cr>
 nnoremap <f4> :q<cr>
 nnoremap <f5> :Run<cr>
 nnoremap <f6> <c-^>
 nnoremap <f7> :mak<cr>
-noremap <f8> @:
+nnoremap <f8> :cw<cr>
+inoremap <f8> <c-o>:cw<cr>
 nnoremap <f9> :cp<cr>
+inoremap <f9> <c-o>:cp<cr>
 nnoremap <f10> :cn<cr>
+inoremap <f10> <c-o>:cn<cr>
 nnoremap <f11> <c-w>_<c-w>\|
-nnoremap <f12> :e ~/.vimrc<cr>
+inoremap <f11> <c-o><c-w>_<c-w>\|<cr>
+nnoremap <f12> :se wrap!<cr>
+inoremap <f12> <c-o>:se wrap!<cr>
+
+nnoremap <c-,> :tabe ~/.vimrc<cr>
+nnoremap <c-p> :Files<cr>
 
 nnoremap <leader>w :se wrap!<cr>
 nnoremap <leader>t :se paste!<cr>
